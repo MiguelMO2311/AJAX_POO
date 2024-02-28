@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h2>Lista de Productos</h2>
+    <div id="productos"></div>
+
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var xmlDoc = this.responseXML;
+                var html = '';
+                var productos = xmlDoc.getElementsByTagName('producto');
+                for (var i = 0; i < productos.length; i++) {
+                    var nombre = productos[i].getElementsByTagName('nombre')[0].childNodes[0].nodeValue;
+                    var precio = productos[i].getElementsByTagName('precio')[0].childNodes[0].nodeValue;
+                    html += '<p>' + nombre + ': ' + precio + '</p>';
+                }
+                document.getElementById('productos').innerHTML = html;
+            }
+        };
+        xhttp.open("GET", "productos.php", true);
+        xhttp.send();
+    </script>
+</body>
+
+</html>
