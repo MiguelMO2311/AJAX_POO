@@ -8,10 +8,10 @@ $tasks = [
 
 // Función que muestra las tareas
 function mostrarTareas($tasks) {
-    foreach ($tasks as $task) {
-        $status = $task['completed'] ? 'Completada' : 'Pendiente';
-        echo "<li>{$task['title']} <input type='checkbox' name='{$task['id']}' {$task['completed'] ? 'checked' : ''}> ({$status})</li>";
-    }
+    // foreach ($tasks as $task) {
+    //     $status = $task['completed'] ? 'Completada' : 'Pendiente';
+    //     echo "<li>{$task['title']} <input type='checkbox' name='{$task['id']}' {$task['completed'] ? 'checked' : ''}> ({$status})</li>";
+    // }
 }
 
 // Procesa el formulario
