@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tareas</title>
+</head>
+
+<body>
+    <h1>Lista de Tareas</h1>
+    <form method="GET" onsubmit="enviarDatos(event)">
+        <button type="submit" name="btnMostrar">Mostrar Todas</button>
+        <button type="submit" name="btnElegir">Mostrar Completadas</button>
+        <button type="submit" name="btnCompletar">Completar</button>
+        <button type="submit" name="btnEliminar">Eliminar</button>
+    </form>
+    <ul id="lista">
+        <!-- Las tareas se mostrarán aquí -->
+    </ul>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Función que envia los datos del formulario al archivo tareas.php
+        function enviarDatos(event) {
+            // Evita que el formulario se envíe de forma normal
+            event.preventDefault();
+            // Obtiene los datos del formulario como un objeto
+            var datos = $(event.target).serializeArray();
+            // Hace la petición AJAX al archivo tareas.php
+            $.ajax({
+                url: "tareas.php",
+                method: "GET",
+                data: datos,
+                success: function (respuesta) {
+                    // Mostrar la respuesta del servidor en el elemento <ul>
+                    $("#lista").html(respuesta);
+                },
+                error: function (error) {
+                    // Mostrar un mensaje de error en el elemento <ul>
+                    $("#lista").html("<li>Ha ocurrido un error: " + error.statusText + "</li>");
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
